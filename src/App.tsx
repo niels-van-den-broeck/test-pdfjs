@@ -30,12 +30,10 @@ async function renderPage(pdfDocument: pdfjs.PDFDocumentProxy, page: number) {
 function App() {
   const [document, setDocument] = useState<pdfjs.PDFDocumentProxy>();
   const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
 
   function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     setDocument(undefined);
     setImages([]);
-    setLoading(true)
     const { files } = e.target;
     if (!files) return;
 
@@ -72,7 +70,7 @@ function App() {
   return (
     <>
       <input type="file" accept="pdf" onChange={onFileUpload} />
-      {/* {document && document.numPages > images.length && <img src="https://media.tenor.com/jfmI0j5FcpAAAAAM/loading-wtf.gif" />} */}
+      {document && document.numPages > images.length && <img src="https://media.tenor.com/jfmI0j5FcpAAAAAM/loading-wtf.gif" />}
       <div className="flex-images">
         {images.map((dataUrl, i) => (
           <img key={i} src={dataUrl} />
